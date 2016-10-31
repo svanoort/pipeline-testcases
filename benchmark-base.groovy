@@ -14,7 +14,22 @@ for (int i=0; i<15; i++) {
 // Run a basic shell step
 stage 'shellscript'
 node {
-    sh 'whoami';
+    // Are we on something unix-y?
+    if (isUnix()) {
+        echo "Linux or other UNIX-y system detected."
+        sh 'whoami'
+    }
+    // if not, we must be on windows.
+    else {
+        echo 'Windows system detected.'
+        // Sample Windows bat commands:
+        //    bat "netstat -a"
+        // A powershell command with lots of output. Note the 
+        // escaped double quotes, otherwise you'll never see 
+        // the output:
+        //    bat "powershell.exe -command \"Get-WmiObject -Class Win32_Process\""
+        bat "dir /ad"
+    }
 }
 
 stage 'label based'
