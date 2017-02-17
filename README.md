@@ -5,8 +5,10 @@ Sample testcases for Jenkins pipelines
 
 ## Notes
 
+### February 17, 2017
+
 When creating a stage, the use of parenthesis around the stage name, and curly braces around its body, as shown below,
-is the *proper* way. Doing so without is  deprecated, and you'll see this message in your console log:
+is the correct, current way. Doing so without is deprecated, and you'll see this message in your console log:
 
 Using the ‘stage’ step without a block argument is deprecated
 
