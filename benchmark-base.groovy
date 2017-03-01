@@ -3,23 +3,26 @@
 // Represents a midsized-to-large pipeline (~315ish nodes), maps well to more complexish builds for normal users
 // Intended to be fairly fast to run (a few seconds) but load down some of the pipeline internals like a much larger pipeline
 
+// Adding timestamps to the entire thing.
+timestamps {
+
 for (int i=0; i<15; i++) {
 
-    stage ("stage $i") {
-        echo "ran my stage is $i"        
+    stage ("Looping Stages $i") {
+        echo "My stage number is $i"        
         node {
-            sh 'whoami'
+            sh 'vmstat'
         }
     }
 }
 
 // Run a basic shell step
-stage ('shellscript') {
+stage ('Another shell script') {
     node {
         // Are we on something unix-y?
         if (isUnix()) {
             echo "Linux or other UNIX-y system detected."
-            sh 'whoami'
+            sh 'vmstat'
         }
         // if not, we must be on windows.
         else {
@@ -35,13 +38,14 @@ stage ('shellscript') {
     }
 }
 
-stage ('label based') {
-    echo 'wait for executor'
+stage ('Label-based') {
     node {
-        stage ('things using node') {
-            for (int i=0; i<200; i++) {
-                echo "we waited for this $i seconds"    
+        stage ('Things using node') {
+            for (int i=0; i<20; i++) {
+                echo "We have done this $i times."    
             }
         }
     }
+}
+
 }
